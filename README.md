@@ -1,6 +1,11 @@
 # DesignPattern
 common design patterns
 
+大多数时候，要尽量保持Client的代码不变
+
+比较需要谈到修改，为什么这种设计模式适用于**`某种程度的修改`**
+
+**OCP(open/close principle)对扩张开放，对修改封闭。**
 
 ## Factory
 目的主要是解耦 **decouple**
@@ -44,6 +49,9 @@ Singleton不能被继承
 
 > Reference: http://coolshell.cn/articles/265.html
 
+单例其实有很多pitfall，感觉平常用Eagar简单直接易理解
+
+
 ### Eager
 #### Cons
 instance一直保存在内存
@@ -79,4 +87,32 @@ instance一直保存在内存
 
 ### SingletonEnum
 默认枚举实例的创建`SingletonEnum.INSTANCE`是线程安全的，所以不需要担心线程安全的问题。但是在枚举中的其他任何方法的线程安全由程序员自己负责。还有防止上面的通过反射机制调用私用构造器。
+
+## Builder
+
+	CertainObject obj = new CertainObject.CertainObjectBuilder().method1().method2().build();
+	
+把具体创建过程延缓到具体Builder中
+
+### Difference (builder & factory)
+Builder : **某个复杂Object的创建**，该Object中有多个Parts，每个Part又有多种创建方式
+
+FactoryMethod : **某一个Object创建**
+
+AbstractFactory: **某个类别下多个不关联的Object创建** (AppleFactory creates Iphone & Ipad)
+
+个人感觉Factory比较简单，就是对象的创建。而Builder着重在于一个object需要通过很多steps去build。这个steps是自定义的
+
+如果Jeep决定要添加外设GPS，只需在Builder中新增withGps()；想象一下，factory中需要自己去所有建造方法中手动修改代码，并非新增。
+
+如果Jeep决定新增PowerTrain，只需要在Builder中调用withPowerTrain(NewPowerTrain)而已，而factory则需要新增构造方法去构造返回新的Jeep。
+
+### Summary
+所以，Builder Pattern更加**细化**地创建一个Object。而Factory则是直接**一次性**创建Object。
+
+面对一个Object的创建**变化频繁**，使用Builder Pattern，实际上将Object的创建延缓到了调用处；而Factory Pattern直接返回已经创建完毕的Object Instance。
+
+其实也挺相似，可以在FactoryMethod传入多个参数控制，不过Builder的形式更为简洁和现代化。
+
+Summary：Factory Pattern其实对新增支持不太好，项目初期可以使用，如果多次修改需要使用其他Creational Pattern
 
