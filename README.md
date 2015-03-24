@@ -116,3 +116,11 @@ AbstractFactory: **某个类别下多个不关联的Object创建** (AppleFactory
 
 Summary：Factory Pattern其实对新增支持不太好，项目初期可以使用，如果多次修改需要使用其他Creational Pattern
 
+## Prototype
+本质覆写clone()方法，使用时直接调用clone创建一个相同的instance
+
+	CertainObject newObject = certainObjectInstance.clone()
+	
+这样的好处是，有些Object创建过程比较复杂，创建过一次之后，不如clone的效率高。而且某种场合不需要**新创建**的Object，需要运行过后的Object（可能已经被修改过很多次了），这个时候clone就直接迅速，程序不可能记忆Object创建之后所有的修改。
+
+Java中clone比较复杂，约束较多，特别子类很多的情况下。所以Prototype用的不多。
