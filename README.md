@@ -129,3 +129,29 @@ Java中clone比较复杂，约束较多，特别子类很多的情况下。所�
 拓展系统中已经存在的类，不能直接对其修改。或者拓展第三方，生成新的接口。
 
 总之是过渡。不能直接修改某个类。于是新建类去拓展接口。
+
+## Bridge
+
+    CertainObjectImpl oneImpl = new CertainObjectImpl(new SameAction())
+    oneImpl.someAction()
+    oneImpl.specificAction() // differs from different kinds of implementations
+
+用于一个Object具有多个维度平行的属性和行为
+
+* Wrangler使用Gaosoline Engine
+* Wrangler使用Diesel Engine
+* Renegade使用Turbo Engine
+* ...
+
+他们都可以启动发动机，但是没必要创造
+
+1. GaosolineWrangler
+2. DieselWrangler
+3. TurboWrangler
+4. GaosolineRenegade
+5. DieselRenegade
+6. TurboRenegade
+
+未来可能会增加更多的Engine和Vehicle，Bridge可以更好的**平行增加**二个维度上的属性，而不用去生成**多种组合下的类**。
+
+抽象出相同的行为，Bridge多用于**多维度平行拓展**的Object。
