@@ -155,3 +155,18 @@ Java中clone比较复杂，约束较多，特别子类很多的情况下。所�
 未来可能会增加更多的Engine和Vehicle，Bridge可以更好的**平行增加**二个维度上的属性，而不用去生成**多种组合下的类**。
 
 抽象出相同的行为，Bridge多用于**多维度平行拓展**的Object。
+
+## Composite
+
+解决Tree的Representation。自己包含自己。
+
+##### Cons
+为了讲Leaf和Node共同表现出来，抽取了共同的method和各自特殊的method。Leaf和node均有可能需要暴露自己本不该有的方法。但是该模式解决了统一问题，否则系统需要创建多个方法来满足leaf和node适配问题。
+
+	// Composite
+	systemMethod(AbstractComposite impl);
+	
+	// Non Composite
+	systemMethod(LeafA leafA);
+	systemMethod(LeafB leafB);
+	systemMethod(Node node);
