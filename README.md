@@ -200,3 +200,15 @@ Java中clone比较复杂，约束较多，特别子类很多的情况下。所�
 
 ##### Cons
 * 与原实现容易混淆
+
+
+## Facade
+客户端通过调用Facade的methods就可以使用子系统。
+
+Facade封装整合sub systems的方法给Client调用。
+
+就是创建一个高级对外接口，封装内部各个功能。
+
+基本上平常都用，Service封装DAO的，DAO封装底层的。
+
+好处是Client不用自己去调用sub system里的各种methods了。
