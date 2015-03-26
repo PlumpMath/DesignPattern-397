@@ -7,6 +7,13 @@ common design patterns
 
 **OCP(open/close principle)对扩张开放，对修改封闭。**
 
+* abstract class表现object
+* interface约束action
+* `abstractClass/Interface object = new LastLayerImplementation() // 只替换最后一层`
+
+
+
+
 ## Factory
 目的主要是解耦 **decouple**
 ### Simple Factory | Static Factory Method
@@ -170,3 +177,26 @@ Java中clone比较复杂，约束较多，特别子类很多的情况下。所�
 	systemMethod(LeafA leafA);
 	systemMethod(LeafB leafB);
 	systemMethod(Node node);
+	
+## Decorator
+（覆写|拓展|隐藏）某个implementation的方法
+	
+	AbstractClass|Interface obj = new ConcreteImpl()
+	obj.method()
+	
+	// after decoration
+	AbstractClass|Interface decorator = new Decorator(new ConcreteImpl)
+	decorator.method()
+	
+	
+注意Decoration和ConcreteImpl是属于**一个级别**的类，仍是属于**面向接口编程**。
+
+	// 仍然需要implement所有abstract methods
+	Decorator extends|implements AbstractClass|Interface
+	
+##### Pros
+* 仍可以使用ConcreteImpl的implemented methods，节省代码
+* 不用去完成大量subclass的构建。比方说要更改某个方法的实现，得去修改某些subclass，或者继承subclass去实现新方法
+
+##### Cons
+* 与原实现容易混淆
