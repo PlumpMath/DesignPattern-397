@@ -212,3 +212,20 @@ Facade封装整合sub systems的方法给Client调用。
 基本上平常都用，Service封装DAO的，DAO封装底层的。
 
 好处是Client不用自己去调用sub system里的各种methods了。
+
+## Flyweight
+
+Flyweight让“相同对象”只有一份，而Singleton是只有一个对象。
+
+（个人感觉connection pool之类也算flyweight，当然主要是减少开销，也算另一方面的轻量）
+
+适用
+
+* 只读对象（String）
+* 共享对象
+
+##### Pros
+* 内存占用小
+
+##### Cons
+* 需要工厂管理，Object太多时，查询需要时间
