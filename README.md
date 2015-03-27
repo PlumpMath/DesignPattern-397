@@ -229,3 +229,20 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 
 ##### Cons
 * 需要工厂管理，Object太多时，查询需要时间
+
+## Proxy
+
+对某些方法进行代理，可以在这些方法前后添加额外的功能。
+
+	AbstractClass|Interface obj = new ConcreteImpl();
+	obj.method();
+	
+	AbstractClass|Interface objProxy = new Proxy();
+	objProxy.method()
+
+与Decorator一样，Proxy与ConcreteImpl是属于**一个级别**的类
+
+##### Difference between Proxy and Decorator
+* 运行：Decorator是runtime动态传入，Proxy是开始就写死了。
+* 情景：Decorator多是单纯对**方法**进行扩充，Proxy更多是**业务**上的需要（Service层加入Transaction控制）。
+* Decorator中ConcreteImpl一般可以继续使用，Proxy中一般只使用Proxy才能完成业务需要，ConcreteImpl是不足以支持业务要求
