@@ -246,3 +246,47 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 * 运行：Decorator是runtime动态传入，Proxy是开始就写死了。
 * 情景：Decorator多是单纯对**方法**进行扩充，Proxy更多是**业务**上的需要（Service层加入Transaction控制）。
 * Decorator中ConcreteImpl一般可以继续使用，Proxy中一般只使用Proxy才能完成业务需要，ConcreteImpl是不足以支持业务要求
+
+## Chain of responsibility
+
+二种
+
+* `显式Chain`： 外置流程用Chain对象来管理，Handler向Chain注册产生顺序
+* `隐式Chain`： 每个Handler对象内置next handler
+
+特点：
+
+* 每个Handler具有筛选能力。可以去终止Message继续传递，比如UserFilter发现User没有permission，就return掉；也可以不处理分发给下一位。
+* 而且更复杂些，Chain不一定是LinkedList的结构，可以同时分发message到多个Handler，或者根据情形分发message可以跳级发送（发给下下下个Handler，并非下个Handler）
+
+
+#### Usage
+
+* 同级处理更适合显式Chain
+* `显示Chain`更适合在configuration file中配置；列出一起注入Chain的List|Set中，否则得一个Handler一个Handler地注册
+* 该模式可以decouple掉**顺序sequence**和**处理类Handler**
+* 更细一点，动态配置Handler的处理逻辑；比如Logger中，抽象出Priority，在后期配置时才给予Handler业务能力。（比较牵强，下面的iteration都能做到）
+* 框架Framework中应该用的比较多，因为需要外部注册（configuration file）无法写入一个iteration中，个人觉得实际中iteration就好了。
+
+
+##### iteration in one method ?
+
+    void request(){
+        request1();
+        
+        request2();
+        
+        ...
+    }
+    
+这个其实也不是不可以，就是代码多了会显得臃肿。requestN()怎么办？每次都要修改request()？所以就用循环。
+
+    void request(){
+        for(Request request: Requests){
+            request.handleRequest();
+        }
+    }
+    
+于是...这就成了Chain of responsibility了？
+
+**目的是消灭那个臃肿的iteration**。
