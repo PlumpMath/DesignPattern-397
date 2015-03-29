@@ -13,6 +13,8 @@ common design patterns
 * 自身模式逻辑和业务逻辑分离
 * 重用！
 
+**不必纠结设计模式形式，很多其实抽象出来代码本质是一样的，比如Command和Strategy**
+
 ##### Undo
 1. what the hell is bridge pattern? 
 
@@ -296,8 +298,31 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 
 ## Command
 
-实在是无法理解Command Pattern的存在，不就是多了一个中间层。。。Controller调用Service，Service调用DAO。。。一个意思啊。
+抽象化**执行过程**成一个**对象**。
 
-唯一能想到的好处就是，decouple掉了Client和具体Executor。并且把命令Command这种形似方法过程的东西抽象成了一个对象Object。
+	Executor.wannaDo() --> WannaDoCommand()
 
-调用的时候，传入Command，调用Command.execute()就行了。不用传入Executor，然后调用Executor.someMethod()了。面对很多Command的时候比较实用，而且Command作为一个Object非常的细化，不像Service这层方法众多。传来传去，就一个Command，然后Command就一个方法execute。业务逻辑体现在Command的具体命名，并非方法。或许在大型项目中会容易修改，只用改Command里的execute()就行。否则像如果更改Executor的话，每个引用都要修改。
+1. 命令作为对象易传递易封装参数。否则，在调用处：首先创建Executor，然后调用wannaDo(a,b,c)。
+2. 把Client和Executor给decouple掉了。Client可以不知道具体的Executor，只知道自己执行了某个具体的Command。系统调用各种各样的Commands，不需要知道细节。
+3. 同时Command非常细化，功能单一。不像Service层方法众多。
+
+#### Usage
+* callback
+
+	event.addCallback(command);
+	
+	具体handler里面直接调用command.execute()
+
+* undo
+	
+	保存在history[]中，增加undo()到command中，易于追踪之前执行过的命令，并调用undo()。
+	
+	否则你想怎么写？一个method里如何记录保持之前执行过的methods?
+
+* 多次reuse一个具体操作。
+
+
+#### Cons
+增加中间层，麻烦。试想其实项目中每次具体方法调用都可以抽象成一个个具体的Command。
+
+	
