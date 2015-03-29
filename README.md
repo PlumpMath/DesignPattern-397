@@ -10,8 +10,11 @@ common design patterns
 * abstract class表现object
 * interface约束action
 * `abstractClass/Interface object = new LastLayerImplementation() // 只替换最后一层`
+* 自身模式逻辑和业务逻辑分离
+* 重用！
 
-
+##### Undo
+1. what the hell is bridge pattern? 
 
 
 ## Factory
@@ -290,3 +293,11 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 于是...这就成了Chain of responsibility了？
 
 **目的是消灭那个臃肿的iteration**。
+
+## Command
+
+实在是无法理解Command Pattern的存在，不就是多了一个中间层。。。Controller调用Service，Service调用DAO。。。一个意思啊。
+
+唯一能想到的好处就是，decouple掉了Client和具体Executor。并且把命令Command这种形似方法过程的东西抽象成了一个对象Object。
+
+调用的时候，传入Command，调用Command.execute()就行了。不用传入Executor，然后调用Executor.someMethod()了。面对很多Command的时候比较实用，而且Command作为一个Object非常的细化，不像Service这层方法众多。传来传去，就一个Command，然后Command就一个方法execute。业务逻辑体现在Command的具体命名，并非方法。或许在大型项目中会容易修改，只用改Command里的execute()就行。否则像如果更改Executor的话，每个引用都要修改。
