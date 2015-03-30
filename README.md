@@ -320,6 +320,7 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 	否则你想怎么写？一个method里如何记录保持之前执行过的methods?
 
 * 多次reuse一个具体操作。
+* 类似于Runnable，一个操作可以抽象出独立于系统，系统直接调用Command.execute()就好。Runnable是后期动态产生的，系统当时无法知道具体Runnable引用和其实现方法签名。
 
 
 #### Cons
