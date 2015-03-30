@@ -357,3 +357,19 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 
 * Observer强调1对N去通知某个event，Mediator多用于多对多通信。
 
+## State
+用于一个Object有非常多的state。把每个状态（包含各自操作）给decouple掉了。
+
+否组Object.someMethod()里会有很多if...else
+
+    if current state is A then do A-Action
+    else if current state is B then do B-Action
+    ...
+    
+State Pattern有
+
+* centralized：在context中switch state。
+    
+    context每个方法判断current state，自主选择调用哪个state的方法，并切换current state。
+
+* de-centralized：在各自state中switch state(代码实例采用该种)
