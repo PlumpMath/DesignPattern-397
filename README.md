@@ -347,3 +347,13 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 * 系统中内部复杂通信
 
 一目了然的就不需要使用该模式了。
+
+## Observer
+一个事件的发生触发通知给所有订阅的对象。
+
+#### observer or mediator
+
+* Observer可以动态后期添加Subscriber。Mediator更注重初期默认交互关系绑定。不用后期register subscribers。
+
+* Observer强调1对N去通知某个event，Mediator多用于多对多通信。
+
