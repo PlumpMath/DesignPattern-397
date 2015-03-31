@@ -392,3 +392,25 @@ State Pattern有
 
 ## Template Method
 规范化一个固定形式的行为。减少代码重复量，并且约束子类行为。
+
+## Visitor
+`Douple Dispatch`???
+
+>In software engineering, double dispatch is a special form of multiple dispatch, and a mechanism that dispatches a function call to different concrete functions depending on the runtime types of two objects involved in the call. In most object-oriented systems, the concrete function that is called from a function call in the code depends on the dynamic type of a single object and therefore they are known as single dispatch calls, or simply virtual function calls.
+
+使用场景：Object A,B,C... implements|extends Parent，多个同种类别下的类。
+
+好处是不会影响Object类本身的结构。坏处是每增加一个Object都要add一个Vistor Interface里的method，因为Vistor里的method接收不同的参数。
+
+同样Composite适用使用Visitor去区别遍历中各个方法的操作。但是个人觉得Vistor适用于对Object A,B,C做enhancement，不适合直接调用A,B,C的方法。
+
+比如Composite中file.delete()，就不适合Visitor
+
+1. 要么把delete的逻辑从Object中转移到Vistor中，那么file.delete()就不能直接调用了
+2. 要么在Visitor中直接调用file.delete()，那么感觉多此一举
+
+所以像代码示例中类似
+
+1. 只做对本身属性的enhancement
+2. 每一个Visitor就是表示一个功能，所有该功能的逻辑都在这里。需要新的功能，再创建一个新的Visitor
+3. 讲多个类的组成结构与每个类的处理逻辑给decouple掉了
