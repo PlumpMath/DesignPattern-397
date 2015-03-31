@@ -389,3 +389,6 @@ State Pattern有
 可以把该method的implementation和要使用它的对象decouple掉。
 
 方便在调用处修改。
+
+## Template Method
+规范化一个固定形式的行为。减少代码重复量，并且约束子类行为。
