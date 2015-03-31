@@ -382,3 +382,10 @@ State Pattern有
 
 ##### Code Example Explanation
 增加了个StateContext这个中间类去控制state，防止在主类（Player）中暴露changeState的method。
+
+## Strategy
+针对某一个method有多种implementation。
+
+可以把该method的implementation和要使用它的对象decouple掉。
+
+方便在调用处修改。
