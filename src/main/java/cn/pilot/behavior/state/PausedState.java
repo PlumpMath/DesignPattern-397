@@ -1,14 +1,14 @@
 package cn.pilot.behavior.state;
 
-public class PausedState extends PlayState {
-    public PausedState(Player player) {
-        super(player);
+public class PausedState extends PlayerState {
+    public PausedState(StateContext stateContext) {
+        super(stateContext);
     }
 
     @Override
     public void play() {
         System.out.println("Going to play the video");
-        player.setCurrentState(PlayingState.class.getName());
+        stateContext.setCurrentState(PlayingState.class.getName());
     }
 
     @Override

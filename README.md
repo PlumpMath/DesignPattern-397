@@ -351,6 +351,8 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 ## Observer
 一个事件的发生触发通知给所有订阅的对象。
 
+***注意concurrent的情况，一个List遍历、添加和删除可能在同一时刻发生。***
+
 #### observer or mediator
 
 * Observer可以动态后期添加Subscriber。Mediator更注重初期默认交互关系绑定。不用后期register subscribers。
@@ -373,3 +375,10 @@ State Pattern有
     context每个方法判断current state，自主选择调用哪个state的方法，并切换current state。
 
 * de-centralized：在各自state中switch state(代码实例采用该种)
+
+
+***注意change state需要考虑concurrent的情况，读取和切换可能在同一时刻发生***
+
+
+##### Code Example Explanation
+增加了个StateContext这个中间类去控制state，防止在主类（Player）中暴露changeState的method。

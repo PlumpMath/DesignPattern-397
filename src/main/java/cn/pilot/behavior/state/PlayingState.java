@@ -1,8 +1,8 @@
 package cn.pilot.behavior.state;
 
-public class PlayingState extends PlayState {
-    public PlayingState(Player player) {
-        super(player);
+public class PlayingState extends PlayerState {
+    public PlayingState(StateContext stateContext) {
+        super(stateContext);
     }
 
     @Override
@@ -13,6 +13,6 @@ public class PlayingState extends PlayState {
     @Override
     public void pause() {
         System.out.println("Going to pause the video");
-        player.setCurrentState(PausedState.class.getName());
+        stateContext.setCurrentState(PausedState.class.getName());
     }
 }

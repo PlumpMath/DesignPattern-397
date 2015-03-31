@@ -9,7 +9,7 @@ public class Demo {
         player.pause();
 
         // play state
-        Thread.sleep(1000);
+        Thread.sleep(1500);
         player.play();
         player.pause();
 

@@ -1,9 +1,9 @@
 package cn.pilot.behavior.state;
 
-public class BufferingState extends PlayState {
+public class BufferingState extends PlayerState {
 
-    public BufferingState(final Player player) {
-        super(player);
+    public BufferingState(final StateContext stateContext) {
+        super(stateContext);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -14,7 +14,7 @@ public class BufferingState extends PlayState {
                     e.printStackTrace();
                 }
 
-                player.setCurrentState(PlayingState.class.getName());
+                stateContext.setCurrentState(PlayingState.class.getName());
             }
         }).start();
     }
