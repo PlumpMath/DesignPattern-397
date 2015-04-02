@@ -326,6 +326,28 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 #### Cons
 增加中间层，麻烦。试想其实项目中每次具体方法调用都可以抽象成一个个具体的Command。
 
+## Interpreter
+* 一个句子需要解释的时候用。
+* 抽象语法树
+<p>
+
+	a + b	
+	
+	// a & b is terminal expression
+	// + is nonterminal expression
+	a=3
+	b=2
+
+易于拓展（添加nonterminalExpression），易于修改（只用修改相应的nonterminalExpression）
+
+其实最终的Context.expression中就是把句子构造成
+
+	new Expression(new ExpressionA(new ExpressionB, new ExpressionC())) //先构造出解析的规模
+	
+然后在每个Expression中具体做解释。
+
+实际开发用的比较少，可以选择第三方分析程序或者编译器生成器来处理。
+
 ## Iterator
 将遍历逻辑与容器给decouple掉了。Iterator中可以自定义多种遍历逻辑。
 
