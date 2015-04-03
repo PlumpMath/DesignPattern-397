@@ -370,6 +370,17 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 
 一目了然的就不需要使用该模式了。
 
+## Memento
+就是增加一个中间类Memento来save当前想要的state。这样在Originator对象中创建一个方法来**专门**操作saveToMemento()，不用在main/client中来具体写
+	
+	# remove following codes from clients
+	Originator backup = new ...
+	backup.set(...)
+
+直接调用originator.saveToMemento()就好。
+
+用于需要维持历史记录的情形，缺点是会消耗内存（不敢苟同，都要维持记录了你还要怎么着）
+
 ## Observer
 一个事件的发生触发通知给所有订阅的对象。
 
