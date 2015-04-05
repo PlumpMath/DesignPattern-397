@@ -15,8 +15,51 @@ common design patterns
 
 **不必纠结设计模式形式，很多其实抽象出来代码本质是一样的，比如Command和Strategy**
 
-##### Undo
-1. what the hell is bridge pattern? 
+Reference:
+
+1. [https://github.com/iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns)
+2. [http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns](http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns)
+
+**Creational Patterns**
+
+* Abstract Factory
+* Builder
+* Factory Method
+* Prototype
+* Property
+* Singleton
+
+**Structural Patterns**
+
+* Adapter
+* Bridge (how to use it?)
+* Composite
+* Decorator
+* Facade
+* Flyweight
+* Proxy
+* Service Locator
+* Servant
+* Event Aggregator
+
+**Behavioral Patterns**
+
+* Chain of Responsibility
+* Command
+* Interpreter
+* Iterator
+* Mediator
+* Memento
+* Observer
+* State
+* Strategy
+* Template Method
+* Visitor
+* Double Checked Locking
+* Null Object
+* Callback
+* Execute Around
+
 
 
 ## Factory
@@ -251,6 +294,31 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 * 运行：Decorator是runtime动态传入，Proxy是开始就写死了。
 * 情景：Decorator多是单纯对**方法**进行扩充，Proxy更多是**业务**上的需要（Service层加入Transaction控制）。
 * Decorator中ConcreteImpl一般可以继续使用，Proxy中一般只使用Proxy才能完成业务需要，ConcreteImpl是不足以支持业务要求
+
+## Service Locator
+
+与Dependency Injection一样，decouple了实现类与调用。
+
+需要实现实例的时候，直接`ServiceLocator.lookup(jndiName)`，系统中有**InitialContext**负责去创建实例。个人觉得相比DI，ServiceLocator比较适合多集群调用同一实例，一个Server可以专门负责创建实例。
+
+对于调用者，只需知道“地址”——jndi name
+
+跟DI一样，缺点是**隐藏了类的依赖关系，使得本来可以在编译器暴露的问题，在运行时才会发生**。
+
+调用：
+
+	Context context = new InitialContext();
+	DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/drp");
+	conn = dataSource.getConnection();
+	
+注册：
+
+	<resource-ref>
+		<description>Oracle Datasource drp</description>
+		<res-ref-name>jdbc/drp</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 
 ## Chain of responsibility
 
