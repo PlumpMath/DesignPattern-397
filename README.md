@@ -327,7 +327,7 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 
 如果无法定义在这些类中，提取出来与别的类交互，跟Service层又挺像的。
 
-代码模式基本与Command相同。
+代码细节基本与Command相同。
 
 
 ## Chain of responsibility
@@ -399,6 +399,11 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 
 * 多次reuse一个具体操作。
 * 类似于Runnable，一个操作可以抽象出独立于系统，系统直接调用Command.execute()就好。Runnable是后期动态产生的，系统当时无法知道具体Runnable引用和其实现方法签名。
+* 类似函数传递，函数可以成为一等公民
+    
+        method(command, param){
+            command.do(param);
+        }
 
 
 #### Cons
