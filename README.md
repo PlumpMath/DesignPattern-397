@@ -515,3 +515,12 @@ State Pattern有
 1. 只做对本身属性的enhancement
 2. 每一个Visitor就是表示一个功能，所有该功能的逻辑都在这里。需要新的功能，再创建一个新的Visitor
 3. 讲多个类的组成结构与每个类的处理逻辑给decouple掉了
+
+## Null Object
+把null抽象为一个Object，从此该NullObject就有默认的行为。
+
+不会有NullPointerException，因为NullObject.method()被覆写了，有个default action，但是感觉不利于debug，可以在该method()中加入记录。
+
+不想在代码中作过多的null判断可以使用该模式，代码也优美一点。
+
+感觉不太实用，不过如果null作为一个合理合法legitimate的出现，可以选择NullObject，比较优美直观，也更加面向对象。
