@@ -319,6 +319,16 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
+	
+## Servant
+又是增加一个中间类
+
+如果几个类有**共同的行为**，又**不想定义**在这些类中（实在是想不出来具体的例子），就写在Servant（中间类）中。
+
+如果无法定义在这些类中，提取出来与别的类交互，跟Service层又挺像的。
+
+代码模式基本与Command相同。
+
 
 ## Chain of responsibility
 
