@@ -329,6 +329,14 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 
 代码细节基本与Command相同。
 
+## Event Aggregator
+
+在Observer/Subsriber中，每一个event都有相应的Observer去处理该event。过多的event会导致过多的Observer。
+
+所以引入一个Event Aggregator去handle所有的Event，并相应分发到对应的handlers/subsribers中。这样的decouple掉了不同Handlers/Subscribers和不同的Observers之间的联系。其实也就是拓展了一个Observer去handle所有的event。
+
+比如一个界面的所有操作，就比较适合放到CurrentPanelEventAggregator中，易读结构也好。
+
 
 ## Chain of responsibility
 
