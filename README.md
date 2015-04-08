@@ -26,7 +26,7 @@ Reference:
 * Builder
 * Factory Method
 * Prototype
-* Property
+* Property (non GoF)
 * Singleton
 
 **Structural Patterns**
@@ -38,9 +38,9 @@ Reference:
 * Facade
 * Flyweight
 * Proxy
-* Service Locator
-* Servant
-* Event Aggregator
+* Service Locator (non GoF)
+* Servant (non GoF)
+* Event Aggregator (non GoF)
 
 **Behavioral Patterns**
 
@@ -55,10 +55,14 @@ Reference:
 * Strategy
 * Template Method
 * Visitor
-* Double Checked Locking
-* Null Object
-* Callback
+* Null Object (non GoF)
+
+**Idioms**
+
 * Execute Around
+* Double Checked Locking
+* Poison Pill
+* Callback
 
 
 
@@ -410,7 +414,7 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 * 类似函数传递，函数可以成为一等公民
     
         method(command, param){
-            command.do(param);
+            command.do(param); // pass with commandA.do(pA) or comandB.do(pB); commandA and commandB could be totally different
         }
 
 
@@ -547,3 +551,14 @@ State Pattern有
 不想在代码中作过多的null判断可以使用该模式，代码也优美一点。
 
 感觉不太实用，不过如果null作为一个合理合法legitimate的出现，可以选择NullObject，比较优美直观，也更加面向对象。
+
+## Execute Around
+感觉有点Command，Template Method，Strategy的结合。形似function programming。
+
+    method(){
+        before(); // always same
+        differentAction();
+        after(); // always same
+    }
+
+抽取出differentAction，减少代码量。
