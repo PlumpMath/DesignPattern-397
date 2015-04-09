@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public class Demo {
     public static void main(String[] args) {
-        String exp = "a+b-c+d";
-
         HashMap<String, Integer> var = new HashMap<String, Integer>();
         var.put("a", 1);
         var.put("b", 2);
@@ -14,8 +12,19 @@ public class Demo {
 
         Context context = new Context();
 
-        context.analyse(exp);
+        context.analyse("a+b-c+d");
+        System.out.println(context.run(var));
 
+        context.analyse("a+b*(c+d)");
+        System.out.println(context.run(var));
+
+        context.analyse("(a+b*(c+d))");
+        System.out.println(context.run(var));
+
+        context.analyse("(a+b)/c+d");
+        System.out.println(context.run(var));
+
+        context.analyse("a*(d/b+c)");
         System.out.println(context.run(var));
     }
 }
