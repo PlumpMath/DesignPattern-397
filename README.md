@@ -331,8 +331,6 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 
 如果无法定义在这些类中，提取出来与别的类交互，跟Service层又挺像的。
 
-代码细节基本与Command相同。
-
 ## Event Aggregator
 
 在Observer/Subsriber中，每一个event都有相应的Observer去处理该event。过多的event会导致过多的Observer。
