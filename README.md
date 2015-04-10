@@ -61,7 +61,7 @@ Reference:
 
 * Execute Around
 * Double Checked Locking
-* Poison Pill
+* Posion Pill
 * Callback
 
 
@@ -421,6 +421,13 @@ Flyweight让“相同对象”只有一份，而Singleton是只有一个对象�
 #### Cons
 增加中间层，麻烦。试想其实项目中每次具体方法调用都可以抽象成一个个具体的Command。
 
+#### Examples
+
+    // Apache Camel DefaultShutdownStrategy.java
+    Future<?> future = getExecutorService().submit(new ShutdownTask(context, routesOrdered, timeout, timeUnit, suspendOnly, abortAfterTimeout, timeoutOccurred));
+
+`ShutdownTask`是Runnable的子类，传入参数执行操作。
+
 ## Interpreter
 * 一个句子需要解释的时候用。
 * 抽象语法树
@@ -562,3 +569,25 @@ State Pattern有
     }
 
 抽取出differentAction，减少代码量。
+
+## Callback
+
+与Command，Execute，Obeserver/Subscriber形式差不多。
+
+用于在一个task（线程，事件）中hookup一个callback method，并且这个callback可以获得task里的部分参数。
+
+跟Command一样感觉可以模拟functional programming。
+
+##### Difference between callback & Observer
+个人感觉Observer跟适用centralized的一个系统，有很多的参与者。
+
+callback更偏向单个单个hook。使用简单。东西太多了就要考虑使用observer去管理。
+
+Observer本质使用的就是callback机制，更像是一个pattern去管理callback。
+
+##### Diff between callback & command
+command是一个reusable executable command。封装好了parameters。直接用就行。
+
+callback可以接收task里的变量作为参数，“回调”式处理这些往往必不可少的参数。不好封装起来，因为是callback往往需要这些不确定的参数。
+
+其实也没多大区别:)
