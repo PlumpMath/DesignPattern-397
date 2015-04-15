@@ -61,7 +61,7 @@ Reference:
 
 * Execute Around
 * Double Checked Locking
-* Posion Pill
+* Poison Pill
 * Callback
 
 
@@ -567,6 +567,13 @@ State Pattern有
     }
 
 抽取出differentAction，减少代码量。
+
+## Poison Pill
+producer-consumer实际中，consumer可能会一直在处理message。系统需要一个graceful way to shutdown it，因为直接consumer.interrupt()会终止正在处理某个message的过程，这样会导致misbehavior。
+
+通过send一个Poison Pill Message，consumer会在处理这个Message的时候（consumer往往只在一个时间段内处理一个message）选择一个shutdown的做法。
+
+当然，这个只适用比较简单的Message System。
 
 ## Callback
 
