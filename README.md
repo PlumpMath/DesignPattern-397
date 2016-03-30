@@ -265,7 +265,7 @@ Facade封装整合sub systems的方法给Client调用。
 
 好处是Client不用自己去调用sub system里的各种methods了。
 
-就像 micro-service 中的 API gateway，gateway 聚合多个micro-services来给外部调用，隐藏内部服务（安全），加快响应速度（内网或者 cloud net 内部多个网络请求）。
+就像 micro-service 中的 API gateway，gateway 聚合多个micro-services来给外部调用，隐藏内部服务（安全），加快响应速度（内网或者 cloud net 内部多个网络请求）。同样也 decouple 了业务（mirco-service）和安全（facade 可以单独加 authentication）以及 reroute（facade 做 load-balancer）
 
 缺点是 facade 需要持续更新（粗粒度 api），并且是对外唯一接口，容易成为瓶颈。
 
