@@ -271,7 +271,7 @@ Facade封装整合sub systems的方法给Client调用。
 
 ## Flyweight
 
-Flyweight让“相同对象”只有一份，而Singleton是只有一个对象。
+Flyweight让“相同对象”只有一份，而Singleton是只有一个对象。(比如Wranger，F150都用 V6 engine，Wranger，F150这些类中，就直接 refer 同一个 V6 engine 就可以了，不需要每次都创建一个 engine；所以很多重复相同的东西就抽象出来，在内存中用一个副本就好)
 
 （个人感觉connection pool之类也算flyweight，当然主要是减少开销，也算另一方面的轻量）
 
